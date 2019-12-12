@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Accuweather.App_Code;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,24 +20,31 @@ namespace Accuweather.Controllers
             return new string[] { "Here", "Comes", "Tesla",  };
         }
 
+        [HttpGet]
+        [Route("key/accuweather")]
+        public string GetAccuweatherApiKey()
+        {
+            return Consts.ACCUWEATHER_API_KEY;
+        }
+
         // GET api/values/5
-        public string Get(int id)
+        private string Get(int id)
         {
             return "value";
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        private void Post([FromBody]string value)
         {
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        private void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        private void Delete(int id)
         {
         }
     }
