@@ -311,7 +311,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AutocompleteSearchResponse.cs" />
-    <Compile Include="Models\CurrentConditionsResponse.cs" />
+    <Compile Include="Models\CurrentConditionsFullResponse.cs" />
+    <Compile Include="Models\CurrentConditionsShortResponse.cs" />
     <Compile Include="Models\QuickTypeUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

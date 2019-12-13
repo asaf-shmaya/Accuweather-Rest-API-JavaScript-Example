@@ -15,7 +15,7 @@ namespace QuickType
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class CurrentConditionsResponse
+    public partial class CurrentConditionsFullResponse
     {
         [JsonProperty("LocalObservationDateTime")]
         public DateTimeOffset LocalObservationDateTime { get; set; }
@@ -189,8 +189,8 @@ namespace QuickType
         public ApparentTemperature Speed { get; set; }
     }
 
-    public partial class CurrentConditionsResponse
+    public partial class CurrentConditionsFullResponse
     {
-        public static List<CurrentConditionsResponse> FromJson(string json) => JsonConvert.DeserializeObject<List<CurrentConditionsResponse>>(json, QuickType.Converter.Settings);
+        public static List<CurrentConditionsFullResponse> FromJson(string json) => JsonConvert.DeserializeObject<List<CurrentConditionsFullResponse>>(json, QuickType.Converter.Settings);
     }
 }

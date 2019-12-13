@@ -9,7 +9,7 @@
 
     public static class Serialize
     {
-        public static string ToJson(this List<CurrentConditionsResponse> self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this List<CurrentConditionsFullResponse> self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
     }
 
     internal static class Converter
