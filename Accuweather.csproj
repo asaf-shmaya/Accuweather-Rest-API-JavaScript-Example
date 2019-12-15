@@ -337,6 +337,7 @@
     <Compile Include="Models\AccuweatherOriginal\CurrentConditionsShortResponse.cs" />
     <Compile Include="Models\AccuweatherOriginal\QuickTypeUtils.cs" />
     <Compile Include="Models\Api\AutocompleteSearchResponse.cs" />
+    <Compile Include="Models\Api\CurrentConditionsShortResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

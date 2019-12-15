@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [AccuweatherDB]    Script Date: 12/15/2019 20:02:04 ******/
+/****** Object:  Database [AccuweatherDB]    Script Date: 12/15/2019 23:28:11 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'AccuweatherDB')
 BEGIN
 CREATE DATABASE [AccuweatherDB] ON  PRIMARY 
@@ -74,7 +74,7 @@ ALTER DATABASE [AccuweatherDB] SET DB_CHAINING OFF
 GO
 USE [AccuweatherDB]
 GO
-/****** Object:  Table [dbo].[tbl_Favories]    Script Date: 12/15/2019 20:02:14 ******/
+/****** Object:  Table [dbo].[tbl_Favories]    Script Date: 12/15/2019 23:28:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,16 +96,19 @@ GO
 SET ANSI_PADDING OFF
 GO
 INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (215854, N'Tel Aviv')
-/****** Object:  Table [dbo].[tbl_CurrentWeather]    Script Date: 12/15/2019 20:02:14 ******/
+/****** Object:  Table [dbo].[tbl_CurrentWeather]    Script Date: 12/15/2019 23:28:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_CurrentWeather]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[tbl_CurrentWeather](
 	[LocationKey] [int] NOT NULL,
 	[CelsiusTemperature] [float] NOT NULL,
+	[WeatherText] [varchar](50) NULL,
  CONSTRAINT [PK_tbl_CurrentWeather] PRIMARY KEY CLUSTERED 
 (
 	[LocationKey] ASC
@@ -113,8 +116,10 @@ CREATE TABLE [dbo].[tbl_CurrentWeather](
 ) ON [PRIMARY]
 END
 GO
-INSERT [dbo].[tbl_CurrentWeather] ([LocationKey], [CelsiusTemperature]) VALUES (215854, 16.3)
-/****** Object:  ForeignKey [FK_tbl_Favories_tbl_Favories]    Script Date: 12/15/2019 20:02:14 ******/
+SET ANSI_PADDING OFF
+GO
+INSERT [dbo].[tbl_CurrentWeather] ([LocationKey], [CelsiusTemperature], [WeatherText]) VALUES (215854, 16.3, N'Partly cloudy')
+/****** Object:  ForeignKey [FK_tbl_Favories_tbl_Favories]    Script Date: 12/15/2019 23:28:41 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_tbl_Favories_tbl_Favories]') AND parent_object_id = OBJECT_ID(N'[dbo].[tbl_Favories]'))
 ALTER TABLE [dbo].[tbl_Favories]  WITH CHECK ADD  CONSTRAINT [FK_tbl_Favories_tbl_Favories] FOREIGN KEY([LocationKey])
 REFERENCES [dbo].[tbl_Favories] ([LocationKey])
@@ -122,7 +127,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_tbl_Favories_tbl_Favories]') AND parent_object_id = OBJECT_ID(N'[dbo].[tbl_Favories]'))
 ALTER TABLE [dbo].[tbl_Favories] CHECK CONSTRAINT [FK_tbl_Favories_tbl_Favories]
 GO
-/****** Object:  ForeignKey [FK_tbl_CurrentWeather_tbl_Favories]    Script Date: 12/15/2019 20:02:14 ******/
+/****** Object:  ForeignKey [FK_tbl_CurrentWeather_tbl_Favories]    Script Date: 12/15/2019 23:28:41 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_tbl_CurrentWeather_tbl_Favories]') AND parent_object_id = OBJECT_ID(N'[dbo].[tbl_CurrentWeather]'))
 ALTER TABLE [dbo].[tbl_CurrentWeather]  WITH CHECK ADD  CONSTRAINT [FK_tbl_CurrentWeather_tbl_Favories] FOREIGN KEY([LocationKey])
 REFERENCES [dbo].[tbl_Favories] ([LocationKey])

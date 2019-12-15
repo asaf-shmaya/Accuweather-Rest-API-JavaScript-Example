@@ -49,8 +49,46 @@ namespace Accuweather.Controllers
                 //return $"| Exception | {ex.Message} | InnerException | {ex.InnerException}";
                 return null;
             }
-
         }
+
+        [HttpGet]
+        [Route("getCurrentWeather")]
+        public async Task<Models.Api.CurrentConditionsShortResponse> GetCurrentWeather(int locationKey)
+        {
+            try
+            {
+                RestClient restClient = new RestClient(Consts.ACCUWEATHER_CURRENT_CONDITIONS);
+                RestRequest restRequest = new RestRequest("{locationKey}", Method.GET);
+                restRequest.AddUrlSegment("locationKey", locationKey);
+                restRequest.AddParameter("apikey", Consts.ACCUWEATHER_API_KEY);
+                restRequest.AddParameter("details", false);
+
+                IRestResponse<QuickType.CurrentConditionsShortResponse> response = 
+                    restClient.Execute<QuickType.CurrentConditionsShortResponse>(restRequest);
+
+                List<QuickType.CurrentConditionsShortResponse> responseDeserialized =
+                    QuickType.CurrentConditionsShortResponse.FromJson(response.Content);
+
+                Models.Api.CurrentConditionsShortResponse searchResponse
+                    = new Models.Api.CurrentConditionsShortResponse()
+                    {
+                        Data = responseDeserialized.Select(item => new Models.Api.CurrentConditionsShortResponse.CurrentWeather() 
+                        { 
+                            CelsiusTemperature = item.Temperature.Metric.Value, 
+                            WeatherText = item.WeatherText 
+                        }).ToList<Models.Api.CurrentConditionsShortResponse.CurrentWeather>()
+                    };
+
+                return searchResponse;
+            }
+            catch (Exception ex)
+            {
+                //return $"| Exception | {ex.Message} | InnerException | {ex.InnerException}";
+                return null;
+            }
+        }
+
+
 
         // GET: api/Accuweather
         public IQueryable<tbl_Favories> Gettbl_Favories()

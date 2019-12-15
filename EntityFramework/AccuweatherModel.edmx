@@ -11,6 +11,7 @@
           </Key>
           <Property Name="LocationKey" Type="int" Nullable="false" />
           <Property Name="CelsiusTemperature" Type="float" Nullable="false" />
+          <Property Name="WeatherText" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_Favories">
           <Key>
@@ -78,6 +79,7 @@
           <Property Name="LocationKey" Type="Int32" Nullable="false" />
           <Property Name="CelsiusTemperature" Type="Double" Nullable="false" />
           <NavigationProperty Name="tbl_Favories" Relationship="AccuweatherDBModel.FK_tbl_CurrentWeather_tbl_Favories" FromRole="tbl_CurrentWeather" ToRole="tbl_Favories" />
+          <Property Name="WeatherText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_Favories">
           <Key>
@@ -122,6 +124,7 @@
           <EntitySetMapping Name="tbl_CurrentWeather">
             <EntityTypeMapping TypeName="AccuweatherDBModel.tbl_CurrentWeather">
               <MappingFragment StoreEntitySet="tbl_CurrentWeather">
+                <ScalarProperty Name="WeatherText" ColumnName="WeatherText" />
                 <ScalarProperty Name="CelsiusTemperature" ColumnName="CelsiusTemperature" />
                 <ScalarProperty Name="LocationKey" ColumnName="LocationKey" />
               </MappingFragment>
