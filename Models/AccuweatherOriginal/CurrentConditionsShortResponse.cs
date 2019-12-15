@@ -48,6 +48,18 @@ namespace QuickType
         public Uri Link { get; set; }
     }
 
+    public partial class Imperial
+    {
+        [JsonProperty("Value")]
+        public double Value { get; set; }
+
+        [JsonProperty("Unit")]
+        public string Unit { get; set; }
+
+        [JsonProperty("UnitType")]
+        public long UnitType { get; set; }
+    }
+
     public partial class Temperature
     {
         [JsonProperty("Metric")]

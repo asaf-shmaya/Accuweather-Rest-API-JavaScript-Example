@@ -21,8 +21,8 @@ namespace QuickType
         public long Version { get; set; }
 
         [JsonProperty("Key")]
-        [JsonConverter(typeof(ParseStringConverter))]
-        public long Key { get; set; }
+        [JsonConverter(typeof(ParseStringIntConverter))]
+        public int Key { get; set; }
 
         [JsonProperty("Type")]
         public string Type { get; set; }

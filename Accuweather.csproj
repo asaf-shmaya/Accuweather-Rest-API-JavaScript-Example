@@ -174,6 +174,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -305,24 +306,56 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccuweatherController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="EntityFramework\AccuweatherModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccuweatherModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\AccuweatherModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccuweatherModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\AccuweatherModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccuweatherModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\tbl_CurrentWeather.cs">
+      <DependentUpon>AccuweatherModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\tbl_Favories.cs">
+      <DependentUpon>AccuweatherModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AutocompleteSearchResponse.cs" />
-    <Compile Include="Models\CurrentConditionsFullResponse.cs" />
-    <Compile Include="Models\CurrentConditionsShortResponse.cs" />
-    <Compile Include="Models\QuickTypeUtils.cs" />
+    <Compile Include="Models\AccuweatherOriginal\AutocompleteSearchResponse.cs" />
+    <Compile Include="Models\AccuweatherOriginal\CurrentConditionsShortResponse.cs" />
+    <Compile Include="Models\AccuweatherOriginal\QuickTypeUtils.cs" />
+    <Compile Include="Models\Api\AutocompleteSearchResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\GenerateDB.sql" />
+    <Content Include="App_Data\CreateDB.sql" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="EntityFramework\AccuweatherModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AccuweatherModel.edmx</DependentUpon>
+      <LastGenOutput>AccuweatherModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityFramework\AccuweatherModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AccuweatherModel.edmx</DependentUpon>
+      <LastGenOutput>AccuweatherModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -362,6 +395,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="App_Data\.env" />
+    <EntityDeploy Include="EntityFramework\AccuweatherModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AccuweatherModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityFramework\AccuweatherModel.edmx.diagram">
+      <DependentUpon>AccuweatherModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -477,6 +517,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

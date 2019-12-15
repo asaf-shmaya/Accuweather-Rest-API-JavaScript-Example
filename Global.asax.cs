@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +24,12 @@ namespace Accuweather
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //
             DotNetEnv.Env.Load(envFilePath);
+            //
+            HttpConfiguration httpConfiguration = GlobalConfiguration.Configuration;
+            //
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            httpConfiguration.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }
     }
 }
