@@ -8,6 +8,12 @@ namespace Accuweather.Models.Api
 {
     public class AutocompleteSearchResponse
     {
-        public List<tbl_Favories> Data { get; set; }
+        public List<Favorite> Data { get; set; }
+
+        public class Favorite
+        {
+            public int LocationKey { get; set; }
+            public string LocalizedName { get; set; }
+        }
     }
 }

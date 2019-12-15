@@ -31,7 +31,8 @@ namespace Accuweather.Controllers
                 restRequest.AddParameter("apikey", Consts.ACCUWEATHER_API_KEY);
                 restRequest.AddParameter("q", location);
 
-                IRestResponse<QuickType.AutocompleteSearchResponse> response = restClient.Execute<QuickType.AutocompleteSearchResponse>(restRequest);
+                IRestResponse<QuickType.AutocompleteSearchResponse> response = 
+                    restClient.Execute<QuickType.AutocompleteSearchResponse>(restRequest);
                 
                 List<QuickType.AutocompleteSearchResponse> responseDeserialized = 
                     QuickType.AutocompleteSearchResponse.FromJson(response.Content);
@@ -39,7 +40,10 @@ namespace Accuweather.Controllers
                 Models.Api.AutocompleteSearchResponse searchResponse
                     = new Models.Api.AutocompleteSearchResponse()
                     {
-                        Data = responseDeserialized.Select(item => new tbl_Favories() { LocationKey = item.Key, LocalizedName = item.LocalizedName }).ToList<tbl_Favories>()
+                        Data = responseDeserialized.Select(item => new Models.Api.AutocompleteSearchResponse.Favorite() 
+                        {   LocationKey = item.Key, 
+                            LocalizedName = item.LocalizedName })
+                        .ToList<Models.Api.AutocompleteSearchResponse.Favorite>()
                     };
 
                 return searchResponse;

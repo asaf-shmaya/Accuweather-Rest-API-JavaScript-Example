@@ -16,9 +16,9 @@ namespace Accuweather.EntityFramework
     {
         public int LocationKey { get; set; }
         public string LocalizedName { get; set; }
-    
-        //public virtual tbl_CurrentWeather tbl_CurrentWeather { get; set; }
-        //public virtual tbl_Favories tbl_Favories1 { get; set; }
-        //public virtual tbl_Favories tbl_Favories2 { get; set; }
+
+        public virtual tbl_CurrentWeather tbl_CurrentWeather { get; set; }
+        public virtual tbl_Favories tbl_Favories1 { get; set; }
+        public virtual tbl_Favories tbl_Favories2 { get; set; }
     }
 }
