@@ -52,6 +52,7 @@ currentConditions.attachEvent = function () {
     });
 };
 currentConditions.populateResults = function (results) {
+
     if (!results) { results = api.currentConditionsExampleResponse; currentConditions.localizedName = 'Stored City of Tel Aviv' }
 
     // ASSIGN VALUES
@@ -60,7 +61,8 @@ currentConditions.populateResults = function (results) {
     $($('#current-conditions-template span#weatherText')[0]).text(results.data[0].weatherText);
    
     // UNHIDE CURRENT CONDITIONS ELEMENT
-    $('#current-conditions-template').removeClass('hidden');
+    $('#current-conditions-template').removeClass('hidden');    
+    $('#addToFavorites').removeClass('hidden');
 };
 
 $(function () {
