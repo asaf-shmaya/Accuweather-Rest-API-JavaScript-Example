@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -92,72 +93,57 @@ namespace Accuweather.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("getFavorites")]
-        public IQueryable<tbl_Favories> Gettbl_Favories()
+        public async Task<Models.Api.FavoritesResponse> GetFavories()
         {
-            return db.tbl_Favories;
+            Models.Api.FavoritesResponse favResponse = new Models.Api.FavoritesResponse()
+            {
+                Data = db.tbl_Favories.Select(fav => new Models.Api.FavoritesResponse.Favorite()
+                {
+                    LocalizedName = fav.LocalizedName,
+                    LocationKey = fav.LocationKey
+                }).ToList<Models.Api.FavoritesResponse.Favorite>()
+            };
+
+            return favResponse;
         }
 
-        //// GET: api/Accuweather/5
-        //[ResponseType(typeof(tbl_Favories))]
-        //public async Task<IHttpActionResult> Gettbl_Favories(int id)
-        //{
-        //    tbl_Favories tbl_Favories = await db.tbl_Favories.FindAsync(id);
-        //    if (tbl_Favories == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //[ResponseType(typeof(Models.Api.FavoritesResponse.Favorite))]
+        [HttpPost]
+        [Route("postFavorite")]
+        public async Task<IHttpActionResult> PostFavorite(Models.Api.FavoritesResponse.Favorite favorite)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    return Ok(tbl_Favories);
-        //}
+            try
+            {
+                tbl_Favories favories = new tbl_Favories()
+                {
+                    LocationKey = favorite.LocationKey,
+                    LocalizedName = favorite.LocalizedName
+                };
 
-        //// PUT: api/Accuweather/5
-        //[ResponseType(typeof(void))]
-        //public async Task<IHttpActionResult> Puttbl_Favories(tbl_Favories tbl_Favories)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+                using (AccuweatherDBEntities db = new AccuweatherDBEntities())
+                {
+                    db.Set<tbl_Favories>().AddOrUpdate(favories);
+                    db.SaveChanges();
+                }
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                return InternalServerError(dbUpdateException);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
 
-        //    db.Entry(tbl_Favories).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!tbl_FavoriesExists(tbl_Favories.LocationKey))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        //// POST: api/Accuweather
-        //[ResponseType(typeof(tbl_Favories))]
-        //public async Task<IHttpActionResult> Posttbl_Favories(tbl_Favories tbl_Favories)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.tbl_Favories.Add(tbl_Favories);
-        //    await db.SaveChangesAsync();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = tbl_Favories.LocationKey }, tbl_Favories);
-        //}
+            return Ok();
+        }
 
         //// DELETE: api/Accuweather/5
         //[ResponseType(typeof(tbl_Favories))]
@@ -176,18 +162,20 @@ namespace Accuweather.Controllers
         //    return Ok(tbl_Favories);
         //}
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-        //private bool tbl_FavoriesExists(int id)
-        //{
-        //    return db.tbl_Favories.Count(e => e.LocationKey == id) > 0;
-        //}
+        [HttpGet]
+        [Route("isFavoriteKeyExists")]
+        public bool GetIsFavoriesExists(int id)
+        {
+            return db.tbl_Favories.Count(e => e.LocationKey == id) > 0;
+        }
     }
 }

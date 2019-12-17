@@ -62,7 +62,7 @@
       <Schema Namespace="AccuweatherDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AccuweatherDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_CurrentWeather" EntityType="AccuweatherDBModel.tbl_CurrentWeather" />
-          <EntitySet Name="tbl_Favories" EntityType="AccuweatherDBModel.tbl_Favories" />
+          <EntitySet Name="tbl_Favories" EntityType="AccuweatherDBModel.tbl_Favories" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <AssociationSet Name="FK_tbl_CurrentWeather_tbl_Favories" Association="AccuweatherDBModel.FK_tbl_CurrentWeather_tbl_Favories">
             <End Role="tbl_Favories" EntitySet="tbl_Favories" />
             <End Role="tbl_CurrentWeather" EntitySet="tbl_CurrentWeather" />
@@ -81,7 +81,7 @@
           <NavigationProperty Name="tbl_Favories" Relationship="AccuweatherDBModel.FK_tbl_CurrentWeather_tbl_Favories" FromRole="tbl_CurrentWeather" ToRole="tbl_Favories" />
           <Property Name="WeatherText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tbl_Favories">
+        <EntityType Name="tbl_Favories" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
             <PropertyRef Name="LocationKey" />
           </Key>

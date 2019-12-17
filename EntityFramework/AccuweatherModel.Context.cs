@@ -18,6 +18,7 @@ namespace Accuweather.EntityFramework
         public AccuweatherDBEntities()
             : base("name=AccuweatherDBEntities")
         {
+            tbl_Favories = Set<tbl_Favories>();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,6 +27,6 @@ namespace Accuweather.EntityFramework
         }
     
         public virtual DbSet<tbl_CurrentWeather> tbl_CurrentWeather { get; set; }
-        public virtual DbSet<tbl_Favories> tbl_Favories { get; set; }
+        internal virtual DbSet<tbl_Favories> tbl_Favories { get; set; }
     }
 }

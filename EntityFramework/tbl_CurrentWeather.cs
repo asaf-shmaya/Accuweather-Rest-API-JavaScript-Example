@@ -17,6 +17,7 @@ namespace Accuweather.EntityFramework
         public int LocationKey { get; set; }
         public double CelsiusTemperature { get; set; }
         public string WeatherText { get; set; }
+    
         public virtual tbl_Favories tbl_Favories { get; set; }
     }
 }
