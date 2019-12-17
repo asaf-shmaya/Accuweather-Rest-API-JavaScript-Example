@@ -8,13 +8,16 @@
         </div>
     </div>
 </div>
+
 <div class="row">
+
     <div class="col-md-4">
         <div id="current-conditions-template" class="conditions-template hidden">
             <p id="localizedName">{LocalizedName}</p>
             <p><span id="celsiusTemperature">{CelsiusTemperature}</span> <span id="weatherText">{WeatherText}</span></p>
         </div>
     </div>
+
     <div class="col-md-4">
         <button type="button" class="btn btn-default hidden" id="addToFavorites">
             <i class="fa fa-heart"></i>
@@ -23,12 +26,34 @@
     </div>
 
     <div class="col-md-4 border-left" id="locationsSearchResults">
-        
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-12 text-center jumbotron">
+        <h3>Favorites</h3>
+        <button type="button" class="btn btn-default" id="btn-reload">Reload</button>
+    </div>
+
+    <div class="col-md-4 border-left hidden" id="favoritesSearchResults">
+
+    </div>
+</div>
+
+
+
+<div id="templates" class="hidden">
+    <div id="locations-template" class="locations-template panel" locationkey="0">
+        <a>{LocalizedName}</a>
     </div>
 </div>
 
 <div id="templates" class="hidden">
-    <div id="locations-template" class="locations-template panel" locationkey="215854">
-        <a>{LocalizedName}</a>
+    <div id="favorites-template" class="locations-favorites panel" locationkey="0">
+        <p>{LocalizedName}</p>
     </div>
 </div>

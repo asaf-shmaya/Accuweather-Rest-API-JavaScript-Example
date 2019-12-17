@@ -83,7 +83,7 @@ currentConditions.populateResults = function (results) {
 var favorites = [];
 favorites.attachEventAdd = function () {
     $('#addToFavorites').click(function () {
-        var locationKey = $('div.conditions-template p#localizedName').attr("locationKey");
+        var locationKey = $('div.conditions-template p#localizedName').attr('locationKey');
         var localizedName = $('div.conditions-template p#localizedName').text();
         //
         $.ajax({
@@ -104,9 +104,49 @@ favorites.attachEventAdd = function () {
         });
     });
 };
+favorites.attachEventReload = function () {
+    $('#btn-reload').click(function () {
+        $.ajax({
+            method: 'GET',
+            url: api.favoritesUrl,
+            success: function (response) {
+                favorites.reload(response);
+                event.stopPropagation();
+                return false;
+            },
+            error: function (xhr, status) {
+                console.log('statusText: ' + xhr.statusText);
+                alert('Error loading favorites')
+                event.stopPropagation();
+                return false;
+            }
+        });
+    });
+};
+//
+favorites.reload = function (results) {
+    if (!results) { alert('No results!'); };
+    // EMPTY LAST RESULTS IF ANY BEFORE POPULATING NEW RESULTS
+    $("div#favoritesSearchResults").empty();
+    //
+    results.data.forEach(function (item, index) {
+        // GET TEMPLATE CLONE
+        var searchResultTemplate = $($('#templates #favorites-template')[0].outerHTML).clone();
+        // REMOVE ID FROM TEMPLATE GENERATION
+        searchResultTemplate.removeAttr('id');
+        // REPLACE PLACEHOLDERS TEXT / VALUES
+        searchResultTemplate.attr('locationkey', item.locationKey);
+        searchResultTemplate.find('p').text(item.localizedName);
+        // ATTACH TO DESIGNATED PLACE
+        searchResultTemplate.appendTo($("#favoritesSearchResults"));
+    }); 
+    //
+    $('#favoritesSearchResults').removeClass('hidden');    
+};
 //
 $(function () {
     search.attachEvent();
+    favorites.attachEventReload();
 });
 //
 var demo = {
