@@ -38,8 +38,10 @@
         <h3>Favorites</h3>
         <button type="button" class="btn btn-default" id="btn-reload">Reload</button>
     </div>
+</div>
 
-    <div class="col-md-4 border-left hidden" id="favoritesSearchResults">
+<div class="row">
+    <div class="hidden" id="favoritesSearchResults">
 
     </div>
 </div>
@@ -53,7 +55,12 @@
 </div>
 
 <div id="templates" class="hidden">
-    <div id="favorites-template" class="locations-favorites panel" locationkey="0">
-        <p>{LocalizedName}</p>
+    <div class="col-md-4">
+        <div id="favorites-template" class="locations-favorites panel" locationkey="0">
+            <span>{LocalizedName}</span>
+            <button type="button" class="btn btn-default" id="addToFavorites" data-toggle="tooltip" data-placement="right" title="Remove">
+                <i class="fa fa-remove"></i>
+            </button>
+        </div>
     </div>
 </div>

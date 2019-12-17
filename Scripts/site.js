@@ -127,7 +127,7 @@ favorites.attachEventReload = function () {
 favorites.reload = function (results) {
     if (!results) { alert('No results!'); };
     // EMPTY LAST RESULTS IF ANY BEFORE POPULATING NEW RESULTS
-    $("div#favoritesSearchResults").empty();
+    $('div#favoritesSearchResults').empty();
     //
     results.data.forEach(function (item, index) {
         // GET TEMPLATE CLONE
@@ -136,12 +136,14 @@ favorites.reload = function (results) {
         searchResultTemplate.removeAttr('id');
         // REPLACE PLACEHOLDERS TEXT / VALUES
         searchResultTemplate.attr('locationkey', item.locationKey);
-        searchResultTemplate.find('p').text(item.localizedName);
+        searchResultTemplate.find('span').text(item.localizedName);
         // ATTACH TO DESIGNATED PLACE
         searchResultTemplate.appendTo($("#favoritesSearchResults"));
     }); 
     //
     $('#favoritesSearchResults').removeClass('hidden');    
+    //
+    $('[data-toggle="tooltip"]').tooltip();
 };
 //
 $(function () {
