@@ -149,14 +149,14 @@ favorites.reload = function (results) {
 };
 //
 favorites.attachEventRemove = function () {
-    $('#removeFromFavorites').click(function () {
-        var locationKey = $($(this)[0].parentElement).attr('locationKey');
+    $('.locations-favorites button i.fa-remove').click(function () {   
+        var locationKey = $($(this).parents('div.locations-favorites')).attr('locationkey');
         //
         $.ajax({
             method: 'DELETE',
             url: api.favoriteUrl + '/' + locationKey,
             success: function (response) {
-                $('div#favoritesSearchResults div.locations-favorites[locationkey="' + locationKey + '"]').remove();
+                $('div#favoritesSearchResults div.locations-favorites[locationkey="' + locationKey + '"]').remove();                
                 event.stopPropagation();
                 return false;
             },
