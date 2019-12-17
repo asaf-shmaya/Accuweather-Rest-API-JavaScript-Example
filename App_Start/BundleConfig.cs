@@ -24,6 +24,7 @@ namespace Accuweather
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/site")
+                .Include("~/Scripts/api.js")
                 .Include("~/Scripts/site.js")
             );
         }

@@ -1,65 +1,4 @@
-﻿var api = [];
-api.searchUrl = 'https://localhost:44351/api/accuweather/search?';
-api.searchExampleResponseToLocationTel = {
-    data: [
-        {
-            locationKey: 215854,
-            localizedName: 'Tel Aviv',
-        },
-        {
-            locationKey: 3431644,
-            localizedName: 'Telanaipura',
-        },
-        {
-            locationKey: 300558,
-            localizedName: 'Telok Blangah New Town',
-        },
-        {
-            locationKey: 325876,
-            localizedName: 'Telford',
-        },
-        {
-            locationKey: 169072,
-            localizedName: 'Telavi',
-        },
-        {
-            locationKey: 230611,
-            localizedName: 'Telsiai',
-        },
-        {
-            locationKey: 2723742,
-            localizedName: 'Telégrafo',
-        },
-        {
-            locationKey: 186933,
-            localizedName: 'Tela',
-        },
-        {
-            locationKey: 3453754,
-            localizedName: 'Telaga Asih',
-        },
-        {
-            locationKey: 3453755,
-            localizedName: 'Telagamurni',
-        },
-    ],
-};
-api.currentConditionsUrl = 'https://localhost:44351/api/accuweather/getCurrentWeather?';
-api.currentConditionsExampleResponse = {
-    data: [
-        {
-            celsiusTemperature: 12.9,
-            weatherText: 'Mostly clear',
-        },
-    ],
-};
-
-/*
- *  api.currentConditionsExampleResponse.data[0].celsiusTemperature
-    api.currentConditionsExampleResponse.data[0].weatherText
- */
- 
-var search = [];
+﻿var search = [];
 search.attachEvent = function () {
     $('#btn-search').click(function () {
         $.ajax({
@@ -126,4 +65,8 @@ currentConditions.populateResults = function (results) {
 
 $(function () {
     search.attachEvent();
+    /* DEMO: 
+     * search.populateResults();
+     * currentConditions.populateResults();
+     */
 });

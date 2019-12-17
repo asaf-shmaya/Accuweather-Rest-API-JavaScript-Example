@@ -94,11 +94,12 @@ namespace Accuweather.Controllers
 
 
 
-        //// GET: api/Accuweather
-        //public IQueryable<tbl_Favories> Gettbl_Favories()
-        //{
-        //    return db.tbl_Favories;
-        //}
+        [HttpGet]
+        [Route("getFavorites")]
+        public IQueryable<tbl_Favories> Gettbl_Favories()
+        {
+            return db.tbl_Favories;
+        }
 
         //// GET: api/Accuweather/5
         //[ResponseType(typeof(tbl_Favories))]
