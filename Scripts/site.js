@@ -10,14 +10,17 @@ search.attachEvent = function () {
             },
             error: function (xhr, status) {
                 console.log('statusText: ' + xhr.statusText);
+                search.populateResults();
             }
         });
     });
 };
-
+//
 search.populateResults = function (results) {
     if (!results) { results = api.searchExampleResponseToLocationTel; }
-
+    // EMPTY LAST RESULTS IF ANY BEFORE POPULATING NEW RESULTS
+    $("div#locationsSearchResults").empty();
+    //
     results.data.forEach(function (item, index) {
         // GET TEMPLATE CLONE
         var searchResultTemplate = $($('#templates #locations-template')[0].outerHTML).clone();
@@ -32,43 +35,80 @@ search.populateResults = function (results) {
 
     currentConditions.attachEvent();
 };
-
+//
 var currentConditions = [];
-currentConditions.localizedName = 'Tesla';
+currentConditions.localizedName = 'Default LocalizedName';
+currentConditions.locationKey = '0';
 currentConditions.attachEvent = function () {
     $('#locationsSearchResults .locations-template.panel').click(function () {
         currentConditions.localizedName = $(this)[0].outerText;
+        currentConditions.locationKey = $($(this)[0]).attr('locationkey');
+        //
         $.ajax({
             method: 'GET',
             url: api.currentConditionsUrl,
-            data: { locationKey: $($(this)[0]).attr('locationkey') },
+            data: { locationKey: currentConditions.locationKey },
             success: function (response) {
                 currentConditions.populateResults(response);
             },
             error: function (xhr, status) {
                 console.log('statusText: ' + xhr.statusText);
+                currentConditions.populateResults();
             }
         });
     });
 };
+//
 currentConditions.populateResults = function (results) {
 
-    if (!results) { results = api.currentConditionsExampleResponse; currentConditions.localizedName = 'Stored City of Tel Aviv' }
+    if (!results) {
+        results = api.currentConditionsExampleResponse;
+        currentConditions.localizedName = 'Stored City of Tel Aviv'
+    }
 
     // ASSIGN VALUES
-    $($('#current-conditions-template p#localizedName')[0]).text(currentConditions.localizedName);
+    $($('#current-conditions-template p#localizedName')[0]).text(currentConditions.localizedName)
+    $($('#current-conditions-template p#localizedName')[0]).attr("locationkey", currentConditions.locationKey)
     $($('#current-conditions-template span#celsiusTemperature')[0]).text(results.data[0].celsiusTemperature);
     $($('#current-conditions-template span#weatherText')[0]).text(results.data[0].weatherText);
    
     // UNHIDE CURRENT CONDITIONS ELEMENT
     $('#current-conditions-template').removeClass('hidden');    
     $('#addToFavorites').removeClass('hidden');
-};
 
+    // ATTACH EVENT TO FAVORITE BUTTON
+    favorites.attachEventAdd();
+};
+//
+var favorites = [];
+favorites.attachEventAdd = function () {
+    $('#addToFavorites').click(function () {
+        var locationKey = $('div.conditions-template p#localizedName').attr("locationKey");
+        var localizedName = $('div.conditions-template p#localizedName').text();
+        //
+        $.ajax({
+            method: 'POST',
+            url: api.favoriteUrl,
+            data: { locationKey: locationKey, localizedName: localizedName },
+            success: function (response) {
+                alert('Successfuly added favorite location: ' + localizedName)
+                event.stopPropagation();
+                return false;
+            },
+            error: function (xhr, status) {
+                console.log('statusText: ' + xhr.statusText);
+                alert('Error adding favorite location: ' + localizedName)
+                event.stopPropagation();
+                return false;
+            }
+        });
+    });
+};
+//
 $(function () {
     search.attachEvent();
 });
-
+//
 var demo = {
     populateResults: function () { search.populateResults() }, 
     currentConditions: function () { currentConditions.populateResults()},

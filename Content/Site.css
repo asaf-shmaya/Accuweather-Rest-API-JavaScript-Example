@@ -29,3 +29,7 @@ textarea {
 .border-left {
     border-left: 1px solid #ddd;
 }
+
+.fa-heart {
+    color: red;
+}

@@ -134,11 +134,11 @@ namespace Accuweather.Controllers
             }
             catch (DbUpdateException dbUpdateException)
             {
-                return InternalServerError(dbUpdateException);
+                return InternalServerError();
             }
             catch (Exception ex)
             {
-                return InternalServerError(ex);
+                return InternalServerError();
             }
 
             return Ok();
@@ -163,14 +163,14 @@ namespace Accuweather.Controllers
             }
             catch (DbUpdateException dbUpdateException)
             {
-                return InternalServerError(dbUpdateException);
+                return InternalServerError();
             }
             catch (Exception ex)
             {
-                return InternalServerError(ex);
+                return InternalServerError();
             }
 
-            return Ok(tbl_Favories);
+            return Ok($"Succesfuly removed location key '{id}' from favorites.");
         }
 
         [HttpGet]

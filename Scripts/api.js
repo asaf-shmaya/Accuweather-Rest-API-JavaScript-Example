@@ -53,3 +53,4 @@ api.currentConditionsExampleResponse = {
         },
     ],
 };
+api.favoriteUrl = 'https://localhost:44351/api/accuweather/favorite';
