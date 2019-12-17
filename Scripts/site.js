@@ -65,8 +65,9 @@ currentConditions.populateResults = function (results) {
 
 $(function () {
     search.attachEvent();
-    /* DEMO: 
-     * search.populateResults();
-     * currentConditions.populateResults();
-     */
 });
+
+var demo = {
+    populateResults: function () { search.populateResults() }, 
+    currentConditions: function () { currentConditions.populateResults()},
+};

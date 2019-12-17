@@ -44,7 +44,7 @@ api.searchExampleResponseToLocationTel = {
         },
     ],
 };
-api.currentConditionsUrl = 'https://localhost:44351/api/accuweather/getCurrentWeather?';
+api.currentConditionsUrl = 'https://localhost:44351/api/accuweather/currentWeather?';
 api.currentConditionsExampleResponse = {
     data: [
         {
