@@ -144,6 +144,30 @@ favorites.reload = function (results) {
     $('#favoritesSearchResults').removeClass('hidden');    
     //
     $('[data-toggle="tooltip"]').tooltip();
+    //
+    favorites.attachEventRemove();
+};
+//
+favorites.attachEventRemove = function () {
+    $('#removeFromFavorites').click(function () {
+        var locationKey = $($(this)[0].parentElement).attr('locationKey');
+        //
+        $.ajax({
+            method: 'DELETE',
+            url: api.favoriteUrl + '/' + locationKey,
+            success: function (response) {
+                $('div#favoritesSearchResults div.locations-favorites[locationkey="' + locationKey + '"]').remove();
+                event.stopPropagation();
+                return false;
+            },
+            error: function (xhr, status) {
+                console.log('statusText: ' + xhr.statusText);
+                alert('Error loading favorites')
+                event.stopPropagation();
+                return false;
+            }
+        });
+    });
 };
 //
 $(function () {

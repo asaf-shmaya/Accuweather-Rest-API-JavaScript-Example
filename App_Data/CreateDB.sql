@@ -96,6 +96,10 @@ GO
 SET ANSI_PADDING OFF
 GO
 INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (215854, N'Tel Aviv')
+INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (213225, N'Jerusalem')
+INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (326920, N'Bath')
+INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (328328, N'London')
+INSERT [dbo].[tbl_Favories] ([LocationKey], [LocalizedName]) VALUES (329139, N'Londonderry')
 /****** Object:  Table [dbo].[tbl_CurrentWeather]    Script Date: 12/15/2019 23:28:41 ******/
 SET ANSI_NULLS ON
 GO
