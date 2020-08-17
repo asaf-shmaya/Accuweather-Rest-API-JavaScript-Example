@@ -4,9 +4,9 @@ GO
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'AccuweatherDB')
 BEGIN
 CREATE DATABASE [AccuweatherDB] ON  PRIMARY 
-( NAME = N'AccuweatherDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\AccuweatherDB.mdf' , SIZE = 2048KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'AccuweatherDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\AccuweatherDB.mdf' , SIZE = 2048KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'AccuweatherDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\AccuweatherDB_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'AccuweatherDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\AccuweatherDB_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 END
 GO
 ALTER DATABASE [AccuweatherDB] SET COMPATIBILITY_LEVEL = 100
