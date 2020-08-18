@@ -1,5 +1,3 @@
-# Asaf-Shmaya-12-12-2019-FullStack
-
 This is an example project for showing use of following:
 Microsoft.AspNet.Mvc, HTML, CSS3, jQuery, Bootstrap, Font Awesome,
 Entity Framework - DB First,
