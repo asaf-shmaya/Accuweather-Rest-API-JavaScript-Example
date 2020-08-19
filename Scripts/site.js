@@ -81,6 +81,7 @@ currentConditions.populateResults = function (results) {
 };
 //
 var favorites = [];
+favorites.btnReloadId = 'btn-reload';
 favorites.attachEventAdd = function () {
     $('#addToFavorites').click(function () {
         var locationKey = $('div.conditions-template p#localizedName').attr('locationKey');
@@ -140,6 +141,9 @@ favorites.reload = function (results) {
         // ATTACH TO DESIGNATED PLACE
         searchResultTemplate.appendTo($("#favoritesSearchResults"));
     }); 
+    // SET LAST RELOAD TIME LABEL
+    var label = $('label[for="' + favorites.btnReloadId + '"]');
+    label.text(moment().format('LT') + ' (' + moment().format('L') + ')');
     //
     $('#favoritesSearchResults').removeClass('hidden');    
     //
