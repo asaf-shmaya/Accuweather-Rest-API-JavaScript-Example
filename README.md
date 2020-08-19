@@ -16,3 +16,10 @@ and this file must contain a line for Accuweather
 in the following format:
 
 ACCUWEATHER_API_KEY = KEY_WITHOUT_QUOTES
+
+In order of creating the basic DB, you need to edit
+the file 'CreateDB.sql' with the right path for your 
+sql server. 
+
+The entity framework connection string also requires 
+adjusting to your environment. 
