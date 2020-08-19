@@ -1,5 +1,5 @@
 This is an example project for showing use of following:
-Microsoft.AspNet.Mvc, HTML, CSS3, jQuery, Bootstrap, Font Awesome,
+Microsoft.AspNet.Mvc, HTML, CSS3, jQuery, Bootstrap, Font Awesome, Moment.js,
 Entity Framework - DB First,
 Publishing REST Web API,
 Consuming REST Web API - Server Side,
